@@ -48,10 +48,10 @@ namespace Testss
            
 
             Deck deck = new Deck(cards, 20);
-            Equip card = new Equip(1,"Character", Card.Card_Rarity.UltraRare);
+            Equip card = new Equip(1,"Character", Card.Card_Rarity.UltraRare,Equip.Target_Attribute.ALL,8,Equip.E_Affinity.Undead);
             deck.AddCard(card);
             Assert.AreEqual(19, deck.CostPoints);
-            Equip card1 = new Equip(9, "Equip", Card.Card_Rarity.UltraRare);
+            Equip card1 = new Equip(9, "Equip", Card.Card_Rarity.UltraRare, Equip.Target_Attribute.ALL,9, Equip.E_Affinity.Undead);
             deck.AddCard(card1);
             Assert.AreEqual(10, deck.CostPoints);
 
