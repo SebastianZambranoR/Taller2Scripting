@@ -22,17 +22,23 @@ namespace Testss
             string name = "Character";
           
             Deck deck = new Deck(cards, costPointsd);
-            Card card = new Card(costPointsc, name, Card.Card_Rarity.UltraRare);
+            Character card = new Character(1, name, Card.Card_Rarity.UltraRare,8,19);
             deck.AddCard(card);
            
-            Card card1= new Card(9, name, Card.Card_Rarity.UltraRare);
+            SupportSkill card1= new SupportSkill(1, name, Card.Card_Rarity.UltraRare,SupportSkill.Effect_Type.ReduceAll,9);
             deck.AddCard(card1);
-            //Deben haber 2 cartas en el deck
-            Assert.AreEqual(2,deck.Amount);
+            Character ch = new Character(1, name, Card.Card_Rarity.UltraRare, 8, 19);
+            deck.AddCard(ch);
+            Character ch2 = new Character(1, name, Card.Card_Rarity.UltraRare, 8, 19);
+            deck.AddCard(ch2);
+
+            //Deben haber 4 cartas en el deck
+            Assert.AreEqual(4,deck.Amount);
+
             //Ahora el costPoint del deck es menor que el de la carta y no se añade
-            Card card2 = new Card(14, "Equip", Card.Card_Rarity.Common);
+           /* Equip card2 = new Equip(14, "Equip", Card.Card_Rarity.Common);
             deck.AddCard(card2);
-            Assert.IsFalse(3==deck.Amount);
+            Assert.IsFalse(3==deck.Amount);*/
         }
 
         [Test]
@@ -42,10 +48,10 @@ namespace Testss
            
 
             Deck deck = new Deck(cards, 20);
-            Card card = new Card(1,"Character", Card.Card_Rarity.UltraRare);
+            Equip card = new Equip(1,"Character", Card.Card_Rarity.UltraRare);
             deck.AddCard(card);
             Assert.AreEqual(19, deck.CostPoints);
-            Card card1 = new Card(9, "Equip", Card.Card_Rarity.UltraRare);
+            Equip card1 = new Equip(9, "Equip", Card.Card_Rarity.UltraRare);
             deck.AddCard(card1);
             Assert.AreEqual(10, deck.CostPoints);
 

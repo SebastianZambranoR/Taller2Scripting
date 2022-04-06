@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Testss
 { //poner la clase abstracta
-      class Card
+      abstract class Card
     {
       
         private int costPoints;
