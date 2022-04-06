@@ -42,9 +42,6 @@ namespace Testss
             if(this.costPoints < 0) this.costPoints = 0;
         }
 
-        public void CreateCard(int costPoints, string name, Card.Card_Rarity rarity)
-        {
-            Card card = new Card(costPoints, name, rarity);
-        }
+        //poner restricciones a la baraja
     }
 }

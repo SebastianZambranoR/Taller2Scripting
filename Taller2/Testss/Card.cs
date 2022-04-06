@@ -8,8 +8,6 @@ namespace Testss
 { //poner la clase abstracta
       class Card
     {
-       
-        private Random rnd= new Random();
       
         private int costPoints;
         

@@ -12,7 +12,7 @@ namespace Testss
         private int resistPoints;
         public enum C_Affinity { Knight, Mage, Undead };
         private C_Affinity affinity;
-        public Equip[] array;
+        public Equip[] array= new Equip[3];
         public Character(int costPoints, string name, Card_Rarity rarity, int attackPoints, int resistPoints) : base(costPoints, name, rarity)
         {
             this.attackPoints = attackPoints;
