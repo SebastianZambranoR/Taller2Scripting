@@ -22,10 +22,10 @@ namespace Testss
             string name = "Character";
           
             Deck deck = new Deck(cards, costPointsd);
-            Character card = new Character(1, name, Card.Card_Rarity.UltraRare,8,19);
+            Character card = new Character(5, name, Card.Card_Rarity.UltraRare,8,19);
             deck.AddCard(card);
            
-            SupportSkill card1= new SupportSkill(1, name, Card.Card_Rarity.UltraRare,SupportSkill.Effect_Type.ReduceAll,9);
+            SupportSkill card1= new SupportSkill(5, name, Card.Card_Rarity.UltraRare,SupportSkill.Effect_Type.ReduceAll,9);
             deck.AddCard(card1);
             Character ch = new Character(1, name, Card.Card_Rarity.UltraRare, 8, 19);
             deck.AddCard(ch);
@@ -36,9 +36,10 @@ namespace Testss
             Assert.AreEqual(4,deck.Amount);
 
             //Ahora el costPoint del deck es menor que el de la carta y no se añade
-           /* Equip card2 = new Equip(14, "Equip", Card.Card_Rarity.Common);
+           Equip card2 = new Equip(14, "Equip", Card.Card_Rarity.Common, Equip.Target_Attribute.ALL, 9, Equip.E_Affinity.Undead);
             deck.AddCard(card2);
-            Assert.IsFalse(3==deck.Amount);*/
+            Assert.IsTrue(4==deck.Amount);
+            
         }
 
         [Test]
