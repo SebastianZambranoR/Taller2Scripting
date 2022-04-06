@@ -11,13 +11,13 @@ namespace Testss
         //debe tener una lista de carticas o sólo una referencia a la clase carta
         private List<Card> cards = new List<Card>();
         private int costPoints;
-        private int amount=0;
+        private int amount;
 
         public Deck(List<Card> cards, int costPoints)
         {
             this.cards = cards;
             this.costPoints = costPoints;
-            
+            amount = 0;
         }
 
         public int CostPoints { get => costPoints; }
@@ -26,26 +26,25 @@ namespace Testss
 
         //public string Nombre { get => nombre; set => nombre = value; }
 
-        public void CheckCostPoints(Card card)
+      
+        public void AddCard(Card card)
         {
             
-
-            
-
-        }
-
-        public void AddCard(int costPoints,string name,Card.Card_Rarity rarity)
-        {
-            Card card = new Card(costPoints, name, rarity);
+           // Card card = new Card(costPoints, name, rarity);
             if (this.costPoints >= card.CostPoints)
             {
                cards.Add(card);
-               amount++;
+                amount ++;
+               
                this.costPoints -= card.CostPoints;
+              
             }
-          
+            if(this.costPoints < 0) this.costPoints = 0;
+        }
 
-            
+        public void CreateCard(int costPoints, string name, Card.Card_Rarity rarity)
+        {
+            Card card = new Card(costPoints, name, rarity);
         }
     }
 }
