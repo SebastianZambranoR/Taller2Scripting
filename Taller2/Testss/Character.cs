@@ -13,6 +13,7 @@ namespace Testss
         public enum C_Affinity { Knight, Mage, Undead };
         private C_Affinity affinity;
         public List<Equip> characterEquip = new List<Equip>();
+        public Action<Character> OnDestroy;
         public Character(int costPoints, string name, Card_Rarity rarity, int attackPoints, int resistPoints) : base(costPoints, name, rarity)
         {
             this.attackPoints = attackPoints;
@@ -22,6 +23,30 @@ namespace Testss
         public int AttackPoints { get => attackPoints + getEquipAttackPoints(); }
         public int ResistPoints { get => resistPoints + getEquipResistPoints(); }
         public C_Affinity Affinity { get => affinity; set => affinity = value; }
+
+        int getEquipAttackPoints()
+        {
+            int amount = 0;
+            for (int i = 0; i < characterEquip.Count; i++)
+            {
+                if (characterEquip[i].Target_Attribute1.ToString() == "AP" || characterEquip[i].Target_Attribute1.ToString() == "ALL")
+                    amount++;
+            }
+
+            return amount;
+        }
+
+        int getEquipResistPoints()
+        {
+            int amount = 0;
+            for (int i = 0; i < characterEquip.Count; i++)
+            {
+                if (characterEquip[i].Target_Attribute1.ToString() == "RP" || characterEquip[i].Target_Attribute1.ToString() == "ALL")
+                    amount++;
+            }
+
+            return amount;
+        }
 
         public void ApplyEffect(SupportSkill card)
         {
@@ -65,28 +90,19 @@ namespace Testss
             }
         }
 
-        int getEquipAttackPoints()
+        public void Attack(Character enemy)
         {
-            int amount = 0;
-            for (int i = 0; i < characterEquip.Count; i++)
-            {
-                if (characterEquip[i].Target_Attribute1.ToString() == "AP" || characterEquip[i].Target_Attribute1.ToString() == "ALL")
-                    amount++;
-            }
-
-            return amount;
+            enemy.TakeDamage(attackPoints);
         }
 
-        int getEquipResistPoints()
+        public void TakeDamage(int damage)
         {
-            int amount = 0;
-            for (int i = 0; i < characterEquip.Count; i++)
-            {
-                if (characterEquip[i].Target_Attribute1.ToString() == "RP" || characterEquip[i].Target_Attribute1.ToString() == "ALL")
-                    amount++;
-            }
+            resistPoints -= damage;
 
-            return amount;
+            if(resistPoints >= 0)
+            {
+               OnDestroy.Invoke(this);
+            }
         }
     }
 }

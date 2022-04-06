@@ -15,6 +15,7 @@ namespace Testss
         private int characters;
         private int equip;
         private int suportSkill;
+        public Action<Deck> OnLose;
             
         public Deck(List<Card> cards, int costPoints)
         {
@@ -48,14 +49,31 @@ namespace Testss
                    characters ++;
                    equip++;
                    suportSkill++;  
-                  cards.Add(card);
+                   cards.Add(card);
+                    if (card is Character)
+                    {
+                        (card as Character).OnDestroy += DestroyCharacter;
+                    }
                 }
+
+
                
                 this.costPoints -= card.CostPoints;
 
                 amount++;
             }
             if(this.costPoints < 0) this.costPoints = 0;
+        }
+
+        void DestroyCharacter(Character character)
+        {
+            Cards.Remove(character);
+            characters--;
+
+            if(characters <= 0)
+            {
+                OnLose.Invoke(this);
+            }
         }
 
         //poner restricciones a la baraja

@@ -122,5 +122,37 @@ namespace Testss
             Assert.AreEqual(2, character.characterEquip.Count);
 
         }
+
+        [Test]
+        public void TestCharacterConflict()
+        {
+            Match match = new Match();
+            List<Card> cards = new List<Card>();
+            List<Card> cards2 = new List<Card>();
+            Deck deck = new Deck(cards, 20);
+            Deck deck2 = new Deck(cards2, 20);
+            match.Addplayer(deck);
+            match.Addplayer(deck2);
+            Character character = new Character(1, "Hero", Card.Card_Rarity.Common, 15, 20);
+            Character character2 = new Character(1, "Hero2", Card.Card_Rarity.Common, 8, 20);
+            deck.AddCard(character);
+            deck2.AddCard(character2);
+
+            Assert.AreEqual(1,deck.Cards.Count);
+            Assert.AreEqual(1, deck2.Cards.Count);
+
+            Assert.Null(match.MatchWinner);
+
+            character.Attack(character2);
+
+            Assert.AreEqual(5, character2.ResistPoints);
+
+            character.Attack(character2);
+
+            Assert.AreEqual(0, deck2.Cards.Count);
+            Assert.AreEqual(deck, match.MatchWinner);
+
+
+        }
     }
 }
