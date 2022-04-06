@@ -7,7 +7,7 @@ namespace Testss
 {
     public class Tests
     {
-        private Deck deck;
+    
       
 
 
