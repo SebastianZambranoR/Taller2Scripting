@@ -7,10 +7,6 @@ namespace Testss
 {
     public class Tests
     {
-    
-      
-
-
         [SetUp]
         public void Setup()
         {
@@ -66,5 +62,6 @@ namespace Testss
             Assert.AreEqual(10, deck.CostPoints);
 
         }
+
     }
 }
