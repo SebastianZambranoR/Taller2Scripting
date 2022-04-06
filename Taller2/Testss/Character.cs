@@ -41,6 +41,8 @@ namespace Testss
                     resistPoints += card.EffectPoints;
                     break;
                 case SupportSkill.Effect_Type.DestroyEquip:
+                    if (characterEquip.Count > 0)
+                        DestroyEquip(characterEquip[0]);
                     break;
 
             }

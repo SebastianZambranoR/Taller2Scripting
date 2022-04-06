@@ -62,7 +62,6 @@ namespace Testss
         public void TestSupportSkillReduceAp()
         {
             List<Card> cards = new List<Card>();
-            Deck deck = new Deck(cards, 5);
             SupportSkill reduceAPCard = new SupportSkill(1,"TestSkillReduceAp", Card.Card_Rarity.Common, SupportSkill.Effect_Type.ReduceAP, 10);
 
             //Character
@@ -73,5 +72,54 @@ namespace Testss
 
         }
 
+        [Test]
+        public void TestSupportSkillReduceRp()
+        {
+            List<Card> cards = new List<Card>();
+            SupportSkill reduceAPCard = new SupportSkill(1, "TestSkillReduceAp", Card.Card_Rarity.Common, SupportSkill.Effect_Type.ReduceRP, 10);
+
+            //Character
+            Character character = new Character(1, "Hero", Card.Card_Rarity.Common, 15, 20);
+
+            character.ApplyEffect(reduceAPCard);
+            Assert.AreEqual(10, character.ResistPoints);
+
+        }
+
+        [Test]
+        public void TestSupportSkillReduceAllStats()
+        {
+            List<Card> cards = new List<Card>();
+            SupportSkill reduceAPCard = new SupportSkill(1, "TestSkillReduceAp", Card.Card_Rarity.Common, SupportSkill.Effect_Type.ReduceAll, 10);
+
+            //Character
+            Character character = new Character(1, "Hero", Card.Card_Rarity.Common, 15, 20);
+
+            character.ApplyEffect(reduceAPCard);
+            Assert.AreEqual(5, character.AttackPoints);
+            Assert.AreEqual(10, character.ResistPoints);
+        }
+
+        [Test]
+        public void TestSupportSkillDestroyEquip()
+        {
+            List<Card> cards = new List<Card>();
+            SupportSkill reduceAPCard = new SupportSkill(1, "TestSkillReduceDestroyEquip", Card.Card_Rarity.Common, SupportSkill.Effect_Type.DestroyEquip, 0);
+
+            //Character
+            Character character = new Character(1, "Hero", Card.Card_Rarity.Common, 15, 20);
+            Equip ApEquip = new Equip(2, "TestApEquip", Card.Card_Rarity.Common, Equip.Target_Attribute.AP, 5, Equip.E_Affinity.All);
+
+            character.AddEquip(ApEquip);
+            character.AddEquip(ApEquip);
+            character.AddEquip(ApEquip);
+
+            Assert.AreEqual(3, character.characterEquip.Count);
+
+            character.ApplyEffect(reduceAPCard);
+
+            Assert.AreEqual(2, character.characterEquip.Count);
+
+        }
     }
 }
