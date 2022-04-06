@@ -11,14 +11,17 @@ namespace Testss
         public enum Effect_Type {ReduceAP, ReduceRP, ReduceAll, DestroyEquip, RestoreRP}
         private Effect_Type effect_Type;
 
-        private int EffectPoints = 0;
+        private int effectPoints = 0;
+
+        internal Effect_Type EffectType{ get => effect_Type; set => effect_Type = value; }
+        public int EffectPoints { get => effectPoints; set => effectPoints = value; }
 
         public SupportSkill(int costPoints, string name, Card_Rarity rarity, Effect_Type effect_Type, int effectPoints) : base(costPoints, name, rarity)
         {
             this.effect_Type = effect_Type;
-            EffectPoints = effectPoints;
+            this.effectPoints = effectPoints;
             if(effect_Type == Effect_Type.DestroyEquip)
-                EffectPoints = 0;
+                this.effectPoints = 0;
         }
 
 

@@ -13,16 +13,6 @@ namespace Testss
         }
 
         [Test]
-        public void Test1()
-        {
-           
-        }
-
-        public void TestCreateDeck()
-        {
-
-        }
-        [Test]
         public void TestAddCardToDeck()
         {
             //Comprobar que si se añaden las cartas
@@ -43,8 +33,6 @@ namespace Testss
             Card card2 = new Card(14, "Equip", Card.Card_Rarity.Common);
             deck.AddCard(card2);
             Assert.IsFalse(3==deck.Amount);
-
-
         }
 
         [Test]
@@ -60,6 +48,22 @@ namespace Testss
             Card card1 = new Card(9, "Equip", Card.Card_Rarity.UltraRare);
             deck.AddCard(card1);
             Assert.AreEqual(10, deck.CostPoints);
+
+        }
+
+
+        [Test]
+        public void TestSupportSkillReduceAp()
+        {
+            List<Card> cards = new List<Card>();
+            Deck deck = new Deck(cards, 5);
+            SupportSkill reduceAPCard = new SupportSkill(1,"TestSkillReduceAp", Card.Card_Rarity.Common, SupportSkill.Effect_Type.ReduceAP, 10);
+
+            //Character
+            Character character = new Character(1, "Hero", Card.Card_Rarity.Common, 15, 20);
+
+            character.ApplyEffect(reduceAPCard);
+            Assert.AreEqual(5, character.AttackPoints);
 
         }
 

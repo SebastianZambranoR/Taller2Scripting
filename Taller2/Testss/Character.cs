@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Testss
 {
-    class Character: Card
+    class Character: Card, IEffect
     {
         private int attackPoints;
         private int resistPoints;
@@ -22,5 +22,28 @@ namespace Testss
         public int AttackPoints { get => attackPoints; }
         public int ResistPoints { get => resistPoints; }
         public C_Affinity Affinity { get => affinity; set => affinity = value; }
+
+        public void ApplyEffect(SupportSkill card)
+        {
+            switch (card.EffectType)
+            {
+                case SupportSkill.Effect_Type.ReduceAP:
+                    attackPoints -= card.EffectPoints;
+                    break;
+                case SupportSkill.Effect_Type.ReduceRP:
+                    resistPoints -= card.EffectPoints;
+                    break;
+                case SupportSkill.Effect_Type.ReduceAll:
+                    attackPoints -= card.EffectPoints;
+                    resistPoints -= card.EffectPoints;
+                    break;
+                case SupportSkill.Effect_Type.RestoreRP:
+                    resistPoints += card.EffectPoints;
+                    break;
+                case SupportSkill.Effect_Type.DestroyEquip:
+                    break;
+
+            }
+        }
     }
 }
